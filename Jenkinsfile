@@ -58,5 +58,6 @@ pipeline {
             echo 'Tests Failed'
         }
     }
+    }
 
 }
