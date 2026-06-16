@@ -1,26 +1,17 @@
 pipeline {
-
     agent any
 
-    tools {
-        nodejs 'Node22'
+    environment {
+        PATH = "/opt/homebrew/bin:${env.PATH}"
     }
 
     stages {
 
-        stage('Node Version') {
+        stage('Verify Node') {
             steps {
+                sh 'which node'
                 sh 'node -v'
                 sh 'npm -v'
-            }
-        }
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-                echo 'Code already checked out by Jenkins'
-                checkout scm
             }
         }
 
@@ -30,21 +21,13 @@ pipeline {
             }
         }
 
-        stage('Run Mocha Tests') {
+        stage('Run Tests') {
             steps {
-                sh 'npm tests'
-            }
-        }
-
-        stage('Generate Report') {
-            steps {
-                sh '''
-                npx mocha tests/ui/*.js \
-                --reporter mochawesome
-                '''
+                sh 'npm test'
             }
         }
     }
+
     post {
         always {
             echo 'Pipeline Finished'
@@ -58,6 +41,4 @@ pipeline {
             echo 'Tests Failed'
         }
     }
-    }
-
 }
