@@ -32,8 +32,7 @@ pipeline {
         always {
 
         archiveArtifacts(
-            artifacts: 'screenshots/**/*',
-            artifacts: 'mochawesome-report/*',
+            artifacts: 'screenshots/**/*, mochawesome-report/*',
             fingerprint: true
         )
 
