@@ -30,8 +30,14 @@ pipeline {
 
     post {
         always {
-            echo 'Pipeline Finished'
-        }
+
+        archiveArtifacts(
+            artifacts: 'mochawesome-report/*',
+            fingerprint: true
+        )
+
+        echo 'Pipeline Finished'
+    }
 
         success {
             echo 'Tests Passed'
