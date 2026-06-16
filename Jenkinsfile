@@ -2,6 +2,19 @@ pipeline {
 
     agent any
 
+    tools {
+        nodejs 'Node22'
+    }
+
+    stages {
+
+        stage('Node Version') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+
     stages {
 
         stage('Checkout') {
